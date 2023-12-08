@@ -127,7 +127,7 @@ class TestAccountService(TestCase):
     ######################################################################
     # READ AN ACCOUNT
     ######################################################################
-    def test_read_account(self):
+    def test_get_accounts(self):
         """It should Read a single Account"""
         account = self._create_accounts(1)[0]
         resp = self.client.get(
@@ -186,6 +186,14 @@ class TestAccountService(TestCase):
         """It should not Read an Account that is not found"""
         resp = self.client.get(f"{BASE_URL}/0")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_get_account_list_not_found(self):
+        """ It should list an empty list if no account found"""
+        self._create_accounts(0)
+        resp = self.client.get(BASE_URL)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), 0)
 
     def test_method_not_allowed(self):
         """It should not allow an illegal method call"""
