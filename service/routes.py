@@ -82,7 +82,7 @@ def list_accounts():
 
 
 @app.route("/accounts/<int:account_id>", methods=["GET"])
-def read_account(account_id):
+def get_accounts(account_id):
     """
     Retrieve a single accunt
 
