@@ -24,6 +24,8 @@ HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
+
+
 class TestAccountService(TestCase):
     """Account Service Tests"""
 
@@ -138,7 +140,7 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
         self.assertEqual(data["name"], account.name)
-    
+
     ######################################################################
     # LIST ALL ACCOUNTS
     ######################################################################
@@ -167,7 +169,7 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         updated_account = resp.get_json()
         self.assertEqual(updated_account["name"], "DFR")
-    
+
     ######################################################################
     # DELETE AN ACCOUNT
     ######################################################################
@@ -180,7 +182,7 @@ class TestAccountService(TestCase):
         # make sure they are deleted
         resp = self.client.get(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
-    
+
     ######################################################################
     # ERROR HANDLERS
     ######################################################################
